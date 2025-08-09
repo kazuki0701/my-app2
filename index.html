@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>テストページ</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI再現バトル（ブラウザ版MVP）</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Hello GitHub!</h1>
+  <header>
+    <h1>AI再現バトル（MVP）</h1>
+    <p class="sub">お題画像にどれだけ近いかで勝負！いまは提出画像をアップして判定します。</p>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>① お題画像</h2>
+      <input type="file" accept="image/*" id="targetInput" />
+      <div class="preview"><img id="targetPreview" alt="" /></div>
+    </section>
+
+    <section class="card">
+      <h2>② プレイヤーA</h2>
+      <input type="file" accept="image/*" id="aInput" />
+      <div class="preview"><img id="aPreview" alt="" /></div>
+    </section>
+
+    <section class="card">
+      <h2>③ プレイヤーB</h2>
+      <input type="file" accept="image/*" id="bInput" />
+      <div class="preview"><img id="bPreview" alt="" /></div>
+    </section>
+  </main>
+
+  <div class="actions">
+    <button id="fightBtn" disabled>対戦する</button>
+  </div>
+
+  <section class="result" id="result" hidden>
+    <h2>結果</h2>
+    <div class="scores">
+      <div>A スコア: <span id="scoreA">-</span>%</div>
+      <div>B スコア: <span id="scoreB">-</span>%</div>
+    </div>
+    <div class="winner" id="winner">-</div>
+    <p class="tiny">※ スコアは pHash＋MSE を組み合わせた簡易類似度（ブラウザ内で計算）</p>
+  </section>
+
+  <!-- 計算に使うオフスクリーンキャンバス -->
+  <canvas id="work" width="256" height="256" style="display:none;"></canvas>
+
+  <footer>
+    <button id="resetBtn">別のお題で再戦</button>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
